@@ -32,7 +32,8 @@ public:
 		weights[i] = w;
 	}
 
-private:
+public:
+//changed to public to access weight change in test
 	float output;
 	float output2;
 	static const int maxInputs = 10;
