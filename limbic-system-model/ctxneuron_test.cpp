@@ -17,19 +17,17 @@ int main() {
   std::cin>> serot;
 /*Filling weight array (until working)
   Generating smooth plastic (inputs[i]) test input, for either green or blue, using positive only sin function, max 0.7, double period (max every 720 steps)
-  Generating non-plastic (NonPlasticInputs[i]) test input, simulating irregular stepwise function: R: 0->1 */
+  Generating non-plastic (NonPlasticInputs[i]) test input, simulating irregular stepwise function: R: 0->1 
+  Moveable reward spikes to test different characteristics*/
   for(int i = 0; i<nInputs; i++) {
     weights[i]={initWeight};  
     inputs[i]= 0.7*sin(0.5*i);
     if (inputs[i] < 0) {
         inputs[i] = 0;
     }
-  // ISSUE(1) why is this causing all inputs for NonPlasticInputs to be 1?
-  //moveable reward spikes to test different characteristics   
-   if (0<= i <100 || 500<= i <600 || 1000<= i <1100 || 1300<= i <1400 || 1600<= i <1700 || 4000<= i <4100) {
+    if (((0<=i)&&(i <100)) || ((500<=i)&&(i <600)) || ((1000<=i)&&(i<1100)) || ((1300<=i)&&(i<1400)) || ((1600<= i)&&(i<1700)) || ((4000<=i)&&(i<4100))) {
       NonPlasticInputs[i] = 1;
-    }
-    else {
+    } else {
       NonPlasticInputs[i] = 0;
     }	
   }
@@ -47,7 +45,7 @@ int main() {
        if (doutput[i] < 0) {
           doutput[i] = 0;
        }
-//       slowCa[i]= slowCaDetector->filter(output[i]); //segmentation fault (core dump)- sort after pointer lesson
+//       slowCa[i]= slowCaDetector->filter(output[i]); //only will work if filter based on instantaneous scaler
 //       slowCa[i]= fabs(slowCa[i]);
 //       if (NonPlasticInputs[i] > 0.25) { 
       
@@ -68,6 +66,7 @@ int main() {
    }	
   fclose(f);
 }
+
 
 //Of this version: No compile-, link- or run- time errors
 
