@@ -5,33 +5,34 @@
 #include <stdio.h>
 #include <math.h>
 SecondOrderLowpassFilter* slowCaDetector;
-float serot;
 
 int main() {
-  std::cout<< "Enter 5ht conc\n";
-  std::cin>> serot;
-/*Generating smooth plastic (inputs[i]) test input, for either green or blue, using positive only sin function, max 0.7, double period (max every 720 steps)
-  Generating non-plastic (NonPlasticInputs[i]) test input, simulating irregular stepwise function: R: 0->1 */
   int nInputs = 5000; //5000 simulated steps
-  float NonPlasticInputs[nInputs]= {0};
+  int NonPlasticInputs[nInputs];
   float inputs[nInputs];
+  float weights[nInputs];
+  float serot;
+  float initWeight = 1;  // value: 1 (when weight change function working -> 0)
+  std::cout<< "Enter 5ht conc: ";
+  std::cin>> serot;
+/*Filling weight array (until working)
+  Generating smooth plastic (inputs[i]) test input, for either green or blue, using positive only sin function, max 0.7, double period (max every 720 steps)
+  Generating non-plastic (NonPlasticInputs[i]) test input, simulating irregular stepwise function: R: 0->1 */
   for(int i = 0; i<nInputs; i++) {
-      inputs[i]= 0.7*sin(0.5*i);
-  if (inputs[i] < 0) {
-      inputs[i] = 0;
-  }
-  // ISSUE(1) why is this causing all inputs for NonPlasticInputs to be 1? (have tried many other notations)     
+    weights[i]={initWeight};  
+    inputs[i]= 0.7*sin(0.5*i);
+    if (inputs[i] < 0) {
+        inputs[i] = 0;
+    }
+  // ISSUE(1) why is this causing all inputs for NonPlasticInputs to be 1?
   //moveable reward spikes to test different characteristics   
-  if (0<= i <100 || 500<= i <600 || 1000<= i <1100 || 1300<= i <1400 || 1600<= i <1700 || 4000<= i <4100) {
-    NonPlasticInputs[i] = 1;
+   if (0<= i <100 || 500<= i <600 || 1000<= i <1100 || 1300<= i <1400 || 1600<= i <1700 || 4000<= i <4100) {
+      NonPlasticInputs[i] = 1;
+    }
+    else {
+      NonPlasticInputs[i] = 0;
+    }	
   }
-  else {
-    NonPlasticInputs[i] = 0;
-  }	
-  }
-//No addInput Function, need to intialise weight (0) and create storage array
-  float initWeight = 1; // value: 1 (until weight change function working)
-  float weights[nInputs] = {initWeight}; 
   //Opening write-only file for outputs to be logged to
   FILE* f = fopen("test_ctxneuron.dat","wt");
 //CtxNeuron processing: No simulation- instead of DoStep, processing in loop per inputs array entry 
@@ -46,7 +47,7 @@ int main() {
        if (doutput[i] < 0) {
           doutput[i] = 0;
        }
-//       slowCa[i]= slowCaDetector->filter(output[i]); //only will work if filter based on instantaneous scaler
+//       slowCa[i]= slowCaDetector->filter(output[i]); //segmentation fault (core dump)- sort after pointer lesson
 //       slowCa[i]= fabs(slowCa[i]);
 //       if (NonPlasticInputs[i] > 0.25) { 
       
@@ -62,7 +63,7 @@ int main() {
 //       else {
 //       void CtxNeuron::weightChange(weights[i], slowCa[i]);
 //       }
-       fprintf(f,"%i %f %f %f %f\n",i,NonPlasticInputs[i],inputs[i],weights[i],doutput[i]); //checking doutput until weight change working
+       fprintf(f,"%d %d %f %f %f\n",i,NonPlasticInputs[i],inputs[i],weights[i],doutput[i]); //checking doutput until weight change working
        output2[i] = output[i];
    }	
   fclose(f);
