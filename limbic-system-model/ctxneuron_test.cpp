@@ -69,3 +69,6 @@ int main() {
   fclose(f);
 }
 
+//Of this version: No compile-, link- or run- time errors
+
+
