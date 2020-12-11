@@ -41,21 +41,19 @@ int main() {
     TestCtxNeuron->addInput(InputB);    
    
     for(int i = 0; i<nSteps+1; i++) {
-
-
+	    
       stringstream temp1(R[i]); 
       temp1>>NPInput; 
       stringstream temp2(IG[i]);
       temp2>>InputG;
       stringstream temp3(IB[i]);
       temp3>>InputB;
-      
+    
       OFC = TestCtxNeuron->doStep(NPInput,serot+0.1);
       weightG = TestCtxNeuron->getWeight(0);
       weightB = TestCtxNeuron->getWeight(1);
-      
         if (OFC > 0.25) {
-	      OFC = 0.25;
+	  OFC = 0.25;
         }
       f <<i<<" "<<NPInput<<" "<<InputG<<" "<<InputB<<" "<<OFC<<" "<<weightG<<" "<<weightB<<" \n";
     }  
