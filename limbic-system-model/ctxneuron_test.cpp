@@ -5,6 +5,8 @@
 #include <string>
 #include <sstream>
 
+//To run this program, need: log_26.dat, log_6.dat and log_7.dat in working directory- all can be found in limbic-system-model folder 
+
 using namespace std; 
 
 int main() {
