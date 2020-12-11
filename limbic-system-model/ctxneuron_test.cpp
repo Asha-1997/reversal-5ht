@@ -62,7 +62,7 @@ int main() {
 
 
 //gnuplot
-//plot "v3ctxneuron_test.dat" using 1:2 w l, "v3ctxneuron_test.dat" using 1:3 w l, "v3ctxneuron_test.dat" using 1:4 w l,"v3ctxneuron_test.dat" using 1:5 w l, "v3ctxneuron_test.dat" using 1:6 w l, "v3ctxneuron_test.dat" using 1:7 w l
+//plot "ctxneuron_test.dat" using 1:2 w l, "ctxneuron_test.dat" using 1:3 w l, "ctxneuron_test.dat" using 1:4 w l,"ctxneuron_test.dat" using 1:5 w l, "ctxneuron_test.dat" using 1:6 w l, "ctxneuron_test.dat" using 1:7 w l
 //--
 //python plot
 
