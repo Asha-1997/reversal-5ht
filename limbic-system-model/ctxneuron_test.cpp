@@ -38,7 +38,7 @@ int main() {
   const float learning_rate_OFC = 1;
   cout<< "Enter 5ht conc: ";
   cin>> serot;
-  ofstream f("v5ctxneuron_test.dat");
+  ofstream f("ctxneuron_test.dat");
   CtxNeuron* TestCtxNeuron = new CtxNeuron(learning_rate_OFC,learning_rate_OFC * 0.1);
   TestCtxNeuron->addInput(InputG);
   TestCtxNeuron->addInput(InputB);   
