@@ -33,7 +33,7 @@ int Reset(int _x){
 } 
   	
 int main() {
-  int NPInput,Step,i,x; 
+  int NPInput,step,i,x; 
   float serot,InputG,InputB,OFC = 0,weightG = 0,weightB = 0;
   const float learning_rate_OFC = 1;
   cout<< "Enter 5ht conc: ";
@@ -43,7 +43,7 @@ int main() {
   TestCtxNeuron->addInput(InputG);
   TestCtxNeuron->addInput(InputB);   
     for(i=0; i<22088; i++) {
-    Step = i;
+    step = i;
       if (((0<=i)&&(i<1004))||((21084<=i)&&(i<22088))){ 	// Stage 1 & 6
         NPInput = 0;
         InputG = 0;
@@ -73,40 +73,40 @@ int main() {
       weightB = TestCtxNeuron->getWeight(1);
       if (OFC > 0.25) {
       OFC = 0.25;
-      } f <<Step<<" "<<NPInput<<" "<<InputG<<" "<<InputB<<" "<<OFC<<" "<<weightG<<" "<<weightB<<" \n";
-    }
-  f.close();
+      } f <<step<<" "<<NPInput<<" "<<InputG<<" "<<InputB<<" "<<OFC<<" "<<weightG<<" "<<weightB<<" \n";
+    } f.close();
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*
-This test program is designed to run stereotypical environmental RL paradigm inputs (Rewards and Associated Stimuli(G/B)) through the Ctx Neuron class
-   and log the outputs.
+This program is designed to test the Ctx Neuron class with stereotypical environmental RL paradigm inputs (Rewards and Associated Stimuli(G/B)) and log the 
+outputs. This test will allow for monitoring of alterations made to the class. Outputs can be plotted with [./plot_test.py].
 
 The program tests 6 stages: 
-	1. Zero Input: All outputs at zero.
-	2. LN->LE: 10 Rewards coincide with green stimuli- Green OFC synapse weight should increase, OFC value should respond to reward and should also
+	1. Zero Input: All Inputs at zero- All outputs should be zero.
+	2. LN->LE: 10 Rewards coincide with green stimuli- Green OFC synapse weight should increase, OFC value should respond to rewards and should also
 	   increasingly respond to green stimuli. Highlights LTP speed. 
-	3. RN->RE: Switch1, 10 Rewards now coincide with blue stimuli- Blue OFC synapse weight should increase, Green OFC synapse weight should decrease,
-	   OFC value should respond to reward and should also increasingly respond to blue stimuli presence + decreasingly respond to green. LTP and LTD. 
+	3. RN->RE: Switch1, 10 Rewards coincide with blue stimuli- Blue OFC synapse weight should increase, green OFC synapse weight should decrease,
+	   OFC value should respond to rewards and should also increasingly respond to blue visual stimuli + decreasingly respond to green. LTP and LTD. 
 	4. R2N->R2E: Switch 2, 10 Rewards coincide with green stimuli- Inverse of stage 3 effects + possible increased rates of change (task familiarity)
 	5. Association Decay: 10 Unrewarded green stimuli spikes- Inverse of stage 2 effects. Highlights LTD speed.
-	6. Zero Input2: All outputs at zero- No OFC activation, weights should remain constant.	
+	6. Zero Input2: All inputs at zero- Zero OFC activation, weights should remain constant.	
 
 Timing of Inputs:
   As the agent moves forward to approach the placefields, there is an increase in both green and blue visual stimuli. The agent then  moves toward + turns
   toward the rewarding visual stimulus- this further increases the rewarding stimulus input and, as the agent is no longer looking at the non-rewarding
-  stimulus, the non-rewarding visual stimulus input decreases entirely. The agent now enters the reawrding stimulus placefield and collects the reward- this
+  stimulus, the non-rewarding visual stimulus input falls to zero. The agent now enters the reawrding stimulus placefield and collects the reward- this
   prompts the rewarding visual stimulus input to peak at ~0.6 and the reward stimulus (indicating collection of reward by agent) goes to 1. After reward
   collection, the agent is returned to the starting point and all inputs return to zero. 
 
 Inputs:
   In the polynomial fits, there will be some error due to limitation in computer arithmetic which uses shifting mantissas to add and subtract values (in this 
   case, of large magnitude range)- due to multiplication by increasing x exponents (of increasing x) within each term, the terms affected are difficult to 
-  narrow down and avoid => trade off within accuracy. Therefore, the least degree of polynomials that reliably presented a peak>0.6 for rewarded stimuli and
-  would affect the cortical neuron program most similarly to the selected, average input constellation were used (alt:deg12, rewarded:deg13).
-  There is also discrepancy in the peak value of the rewarded visual stimulus: in this test the peak value is 0.603613 whereas in the average constellation
-  selected from a full-run simulation, the peak value is 0.67753. This will also affect the accuracy and usefulness of the test. 
+  narrow down and avoid => trade off within accuracy. Therefore, the least degree of polynomials that would reliably present a peak >0.6 for rewarded stimuli 
+  and would affect the cortical neuron program most similarly to the selected, average input constellation were used (alt:deg12, rewarded:deg13). The average
+  constellation selected for input modelling was chosen from ouput data from a full-run reversal learning simulation using a method based on beat-typing. 
+  There is also discrepancy in the peak value of the rewarded visual stimulus: in this test the peak value is 0.603613 whereas in the average constellatio, the
+  peak value is 0.67753. This will also negatively affect the accuracy and usefulness of the test. 
 
 	Polynomial Regression Visual Stimulus rewarded Fit			Polynomial Regression Visual Stimulus alt Fit
 	Mode: normal x,y analysis						Mode: normal x,y analysis
