@@ -84,14 +84,14 @@ This test program is designed to run stereotypical environmental RL paradigm inp
    and log the outputs.
 
 The program tests 6 stages: 
-	1. Zero Input: All outputs should remain zero.
+	1. Zero Input: All outputs at zero.
 	2. LN->LE: 10 Rewards coincide with green stimuli- Green OFC synapse weight should increase, OFC value should respond to reward and should also
 	   increasingly respond to green stimuli. Highlights LTP speed. 
-	3. RN->RE: Switch1, 10 Rewards now coincide with blue stimuli- Blue OFC synapse weight should increase, Green OFC synapse weight should increase,
+	3. RN->RE: Switch1, 10 Rewards now coincide with blue stimuli- Blue OFC synapse weight should increase, Green OFC synapse weight should decrease,
 	   OFC value should respond to reward and should also increasingly respond to blue stimuli presence + decreasingly respond to green. LTP and LTD. 
-	4. R2N->R2E: Switch 2, 10 Rewards coincide with green stimuli- Inverse of stage 3 effects + possible increased rates of change
+	4. R2N->R2E: Switch 2, 10 Rewards coincide with green stimuli- Inverse of stage 3 effects + possible increased rates of change (task familiarity)
 	5. Association Decay: 10 Unrewarded green stimuli spikes- Inverse of stage 2 effects. Highlights LTD speed.
-	6. Zero Input2: All outputs should remain constant.	
+	6. Zero Input2: All outputs at zero- No OFC activation, weights should remain constant.	
 
 Timing of Inputs:
   As the agent moves forward to approach the placefields, there is an increase in both green and blue visual stimuli. The agent then  moves toward + turns
