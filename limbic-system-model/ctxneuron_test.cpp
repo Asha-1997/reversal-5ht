@@ -68,9 +68,9 @@ int main() {
         InputG = PolynomialFitRewarded(x);
         InputB = PolynomialFitAlt(x);
       }  
-    OFC = TestCtxNeuron->doStep(NPInput,serot+0.1);
-    weightG = TestCtxNeuron->getWeight(0);
-    weightB = TestCtxNeuron->getWeight(1);
+      OFC = TestCtxNeuron->doStep(NPInput,serot+0.1);
+      weightG = TestCtxNeuron->getWeight(0);
+      weightB = TestCtxNeuron->getWeight(1);
       if (OFC > 0.25) {
       OFC = 0.25;
       } f <<Step<<" "<<NPInput<<" "<<InputG<<" "<<InputB<<" "<<OFC<<" "<<weightG<<" "<<weightB<<" \n";
