@@ -67,6 +67,7 @@ int main() {
         x = Reset(i);
         InputG = PolynomialFitRewarded(x);
         InputB = PolynomialFitAlt(x);
+        NPInput =0;
       }  
       OFC = TestCtxNeuron->doStep(NPInput,serot+0.1);
       weightG = TestCtxNeuron->getWeight(0);
