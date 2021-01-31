@@ -85,15 +85,6 @@ outputs. This test will allow for monitoring of alterations made to the class. O
 
 The program tests 6 stages: 
 	1. Zero Input: All Inputs at zero- All outputs should be zero.
-	2. LN->LE: 10 Rewards coincide with green stimuli- Green OFC synapse weight should increase, OFC value should respond to rewards and should also 
-           increasingly respond to green stimuli. Highlights LTP speed. 
-	3. RN->RE: Switch1, 10 Rewards coincide with blue stimuli- Blue OFC synapse weight should increase, green OFC synapse weight should decrease, OFC 
-           value should respond to rewards and should also increasingly respond to blue visual stimuli + decreasingly respond to green. LTP and LTD. 
-This program is designed to test the Ctx Neuron class with stereotypical environmental RL paradigm inputs (Rewards and Associated Stimuli(G/B)) and log the 
-outputs. This test will allow for monitoring of alterations made to the class. Outputs can be plotted with [./plot_test.py].
-
-The program tests 6 stages: 
-	1. Zero Input: All Inputs at zero- All outputs should be zero.
 	2. LN->LE: 10 Rewards coincide with green stimuli- Green OFC synapse weight should increase, OFC value should respond to rewards and 
 	   should also
 	   increasingly respond to green stimuli. Highlights LTP speed. 
