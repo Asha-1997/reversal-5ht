@@ -63,11 +63,11 @@ const char* setParameters(int scenario) {
 		return "normal";
 	case 1:
 		fprintf(stderr,"DRN is suppressed");
-		DRN_SUPPRESSION = 4;
+		DRN_SUPPRESSION = 10;
 		return "drn_suppress";
 	case 2:
 		fprintf(stderr,"DRN is suppressed and SSRI");
-		DRN_SUPPRESSION = 4;
+		DRN_SUPPRESSION = 10;
 		DRN_OFFSET = 0.15;
 		return "drn_suppress_ssri";
 	case 3:
@@ -94,8 +94,6 @@ LimbicMainWindow::LimbicMainWindow( QWidget *parent,
 	stepsBelow=0;
 	fX0=NULL;
 	foodDelay=FOOD_DELAY;
-	numOfFoodContactsDuringReversal=0;
-	numOfFoodContactsFromReversal=0;
 	isReversal=0;
 
 	// Creates the world
@@ -250,28 +248,18 @@ void LimbicMainWindow::doSimStep() {
 			// get info if that has been eaten
 			int reward_exists=world->getFoodValid(r);
 			if (!(world->getSwapFlag())) {
-				// real food is on the left
 				if (isReversal) {
-					fprintf(stderr,"Final reversal contacts: %d\n",
-						numOfFoodContactsDuringReversal);
+					// 2nd reversal and we are not interested in that! Let's quit.
+					close();
 				}
 			} else {
 				// real food is on the right (reversal)
 				if (!isReversal) {
 					// first step
 					isReversal=1;
-					numOfFoodContactsFromReversal=
-						world->getNumberOfFoodContacts();
 					fprintf(stderr,"########### REVERSAL STARTED ###########\n");
 				}
-				numOfFoodContactsDuringReversal=
-					world->getNumberOfFoodContacts()-
-					numOfFoodContactsFromReversal;
-				fprintf(stderr,"Reversal contacts so far: %d\n",
-					numOfFoodContactsDuringReversal);
 			}
-
-
 			    
 			if (reward_exists) {
 				// reward is still out there
@@ -335,9 +323,6 @@ void LimbicMainWindow::doSimStep() {
 	if (actualStep==MAXSTEP) {
 		close();
 	}
-	if (robot[0]->nEaten >= MAXFOODCONTACTS) {
-		close();
-	}
 }
 
 
@@ -375,8 +360,7 @@ void statistics_food_run(int argc, char **argv) {
 	LimbicMainWindow* limbicbots=NULL;
 	a=new QApplication( argc, argv ); // create application object
 
-	// loop through different learning rates.
-       	for(float phi=0.0001;phi<2*M_PI;phi=phi+0.1) {
+       	for(float phi=0.0001;phi<2*M_PI;phi=phi+0.2) {
 		fprintf(stderr,"phi=%e\n",phi);
 		limbicbots=new LimbicMainWindow();
 		if (!limbicbots) {

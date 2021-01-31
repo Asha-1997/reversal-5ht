@@ -150,10 +150,6 @@ public:
 	// https://www.nature.com/articles/nrn2849
 	SecondOrderLowpassFilter* VTA_forwardinhibition;
 
-	/////////////////////////////////////////////////////////////////
-	// Lateral Hypotyalamus
-	float LH = 0;
-
 	////////////////////////////////////////////////////////////////
 	// dorsolateral ventral pallidum
 	float dlVP = 0;

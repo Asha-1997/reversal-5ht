@@ -15,6 +15,9 @@ Limbic_system::Limbic_system()
 {
 	flog = fopen("log.dat","wt");
 
+	// decay rate for LTD for the mPFC
+	const float tLTD = 0.05;
+
 	// filter which creates a default behaviour when touching the landmarks
 	on_contact_direction_Green_filter = new SecondOrderLowpassFilter(0.1);
 	on_contact_direction_Blue_filter = new SecondOrderLowpassFilter(0.1);
@@ -41,10 +44,10 @@ Limbic_system::Limbic_system()
 	OFCNeuron->addInput(visual_direction_Blue_trace);
 
 	const float w = 1;
-	mPFCneuronGreen = new CtxNeuron(learning_rate_mPFC,learning_rate_mPFC*0.01);
+	mPFCneuronGreen = new CtxNeuron(learning_rate_mPFC,learning_rate_mPFC*0.01,tLTD);
 	mPFCneuronGreen->addInput(visual_direction_Green_trace,w*0.25);
 	
-	mPFCneuronBlue = new CtxNeuron(learning_rate_mPFC,learning_rate_mPFC*0.01);
+	mPFCneuronBlue = new CtxNeuron(learning_rate_mPFC,learning_rate_mPFC*0.01,tLTD);
 	mPFCneuronBlue->addInput(visual_direction_Blue_trace,w*0.25);
         mPFCneuronBlue->addInput(visual_reward_Blue,w);	
 		
@@ -123,17 +126,14 @@ void Limbic_system::doStep(float _reward,
 		OFC = 0.25;
 	}
 	
-	// LH
-	LH = OFC;
-
 	// DRN
 	// the dorsal raphe activity is driven by the OFC in a positive way
-	DRN = (LH + OFC * 4) / (1+RMTg * shunting_inhibition_factor + DRN_SUPPRESSION) + DRN_OFFSET;
+	DRN = (OFC * 5) / (1+RMTg * shunting_inhibition_factor + DRN_SUPPRESSION) + DRN_OFFSET;
 
 	serotoninConcentration = DRNto5HTrelease->filter(DRN);
 
 	// the VTA gets its activity from the LH and is ihibited by the RMTg
-	VTA = (LH + VTA_baseline_activity) / (1+(RMTg + VTA_forwardinhibition->filter(OFC*0.1)) * shunting_inhibition_factor);
+	VTA = (OFC + VTA_baseline_activity) / (1+(RMTg + VTA_forwardinhibition->filter(OFC*0.1)) * shunting_inhibition_factor);
 
 	// this is also generated in the mPFC and then fed down to the NAcc core with the command
 	// to explore

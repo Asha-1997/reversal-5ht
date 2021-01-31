@@ -58,11 +58,6 @@ private:
 
 	int isReversal;
     
-	int numOfFoodContactsDuringReversal;
-
-public:
-	int numOfFoodContactsFromReversal;
-
 public:
 	// Creates the world
 	World* world;

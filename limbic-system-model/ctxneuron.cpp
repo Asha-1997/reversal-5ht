@@ -19,6 +19,7 @@ float CtxNeuron::doStep(float nonPlasticInput, float serot) {
 	if (output < 0) output = 0;
 	if (output > 1) output = 1;
 	if (serot < 0) serot = 0;
+	if (serot > 1) serot = 1;
 	output = ofc5HTreceptors(output,serot,serot*2);
 		
 	float dOutput = output - output2;
@@ -32,7 +33,7 @@ float CtxNeuron::doStep(float nonPlasticInput, float serot) {
 		if (nonPlasticInput > 0.25)
 			weightChange(weights[i], learningRateLTP * serot * *(inputs[i]) * dOutput);
 		// weight change: LTD
-		weightChange(weights[i], - tLTD * learningRateLTD * slowCa);
+		weightChange(weights[i], - tLTD * learningRateLTD * slowCa * serot);
 	}
 
 	output2 = output;

@@ -1,4 +1,3 @@
-
 #include "robot.h"
 #include "world.h"
 
@@ -843,8 +842,9 @@ void Robot::react(int step,int collision) {
 		}
 	}
 
-	if ((reward>0)&&(!rewardFlag)) {
+	if ((reward>0)&&(!rewardFlag)&&(world->getSwapFlag())) {
 		rewardFlag = 1;
+		fprintf(stderr,"Reward eaten during reversal. nReward = %d\n",nReward);
 		nReward++;
 	}
 
