@@ -110,22 +110,7 @@ Inputs:
   There is also discrepancy in the peak value of the rewarded visual stimulus: in this test the peak value is 0.603613 whereas in the average constellatio,
   the peak value is 0.67753. This will also negatively affect the accuracy and usefulness of the test. 
 
-  As the agent moves forward to approach the placefields, there is an increase in both green and blue visual stimuli. The agent then  moves toward + turns
-  toward the rewarding visual stimulus- this further increases the rewarding stimulus input and, as the agent is no longer looking at the non-rewarding
-  stimulus, the non-rewarding visual stimulus input falls to zero. The agent now enters the reawrding stimulus placefield and collects the reward- this
-  prompts the rewarding visual stimulus input to peak at ~0.6 and the reward stimulus (indicating collection of reward by agent) goes to 1. After reward
-  collection, the agent is returned to the starting point and all inputs return to zero. 
-
-Inputs:
-  In the polynomial fits, there will be some error due to limitation in computer arithmetic which uses shifting mantissas to add and subtract values (in this 
-  case, of large magnitude range)- due to multiplication by increasing x exponents (of increasing x) within each term, the terms affected are difficult to 
-  narrow down and avoid => trade off within accuracy. Therefore, the least degree of polynomials that would reliably present a peak >0.6 for rewarded stimuli 
-  and would affect the cortical neuron program most similarly to the selected, average input constellation were used (alt:deg12, rewarded:deg13). The average
-  constellation selected for input modelling was chosen from ouput data from a full-run reversal learning simulation using a method based on beat-typing. 
-  There is also discrepancy in the peak value of the rewarded visual stimulus: in this test the peak value is 0.603613 whereas in the average constellatio, the
-  peak value is 0.67753. This will also negatively affect the accuracy and usefulness of the test. 
-
-	Polynomial Regression Visual Stimulus rewarded Fit			Polynomial Regression Visual Stimulus alt Fit
+ 	Polynomial Regression Visual Stimulus rewarded Fit			Polynomial Regression Visual Stimulus alt Fit
 	Mode: normal x,y analysis						Mode: normal x,y analysis
 	Polynomial degree 13, 503 x,y data pairs.				Polynomial degree 12, 503 x,y data pairs.
 	Correlation coefficient = 0.9825837594639034				Correlation coefficient = 0.9839663659104874
