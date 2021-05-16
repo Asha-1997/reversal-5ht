@@ -3,11 +3,7 @@
 import numpy as np
 import pylab as pl
 #
-<<<<<<< HEAD
-data = np.loadtxt('v5ctxneuron_test.dat');
-=======
 data = np.loadtxt('ctxneuron_test.dat');
->>>>>>> e77a7608a8ecc4255fb586739fc923b1298b6738
 #
 fig = pl.figure(1)
 #
@@ -31,8 +27,3 @@ pl.ylabel('OFC');
 #
 #
 pl.show();
-
-<<<<<<< HEAD
-
-=======
->>>>>>> e77a7608a8ecc4255fb586739fc923b1298b6738
