@@ -106,10 +106,7 @@ Inputs:
   constellation selected for input modelling was chosen from ouput data from a full-run reversal learning simulation using a method based on beat-typing. 
   There is also discrepancy in the peak value of the rewarded visual stimulus: in this test the peak value is 0.603613 whereas in the average constellatio,
   the peak value is 0.67753. This will also negatively affect the accuracy and usefulness of the test. 
-<<<<<<< HEAD
-=======
 
->>>>>>> ab183f434ec9e75c98b1262e7568e546a4d9cc84
  	Polynomial Regression Visual Stimulus rewarded Fit			Polynomial Regression Visual Stimulus alt Fit
 	Mode: normal x,y analysis						Mode: normal x,y analysis
 	Polynomial degree 13, 503 x,y data pairs.				Polynomial degree 12, 503 x,y data pairs.
