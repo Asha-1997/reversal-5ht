@@ -201,7 +201,7 @@ void Limbic_system::doStep(float _reward,
 
 void Limbic_system::logging() {
 	fprintf(flog,"%ld %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f "
-		"%f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %d\n",
+		"%f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f\n",
 		step, //0
 		reward, //1
 		placefieldGreen, //2
@@ -235,7 +235,7 @@ void Limbic_system::logging() {
 		OFCNeuron->getWeight(0), // 30
 		OFCNeuron->getWeight(1), // 31
 		mPFCneuronGreen->getWeight(0), // 32
-		mPFCneuronBlue->getWeight(0), // 33
+		mPFCneuronBlue->getWeight(0) // 33
 		);
 	fflush(flog);
 }
@@ -248,7 +248,7 @@ void Limbic_system::logging() {
 void Limbic_system::logging() {
 	fprintf(flog,"%ld %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f"
 		"%f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %d %f"
-		" %f %f %f %f %f %f %f %f %f %f %f %f %f\n",
+		" %f %f %f %f %f %f %f\n",
 		step, //0
 		reward, //1
 		placefieldGreen, //2
@@ -291,15 +291,10 @@ void Limbic_system::logging() {
 		OFC_LTP_gainG, //39
 		OFC_LTD_gainG, //40
 		OFC_LTP_gainB, //41
-		OFC_LTD_gainB,  //42
-		OFC_green_past, //43
-		OFC_blue_past,  //44
-		mPFCg_green_past, //45
-		mPFCg_blue_past, //46
-		mPFCb_green_past, //47
-		mPFCb_blue_past //48
+		OFC_LTD_gainB  //42
 		);
 	fflush(flog);
 }
 
 */
+
