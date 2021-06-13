@@ -47,7 +47,7 @@ int main() {
 	float weightG, weightB;
 	float OFC; 
   
-  	//Unlike in the full simulation, in this test, the value for serotonin concentration is static. To aid testing of crtneuron class behaviour with changng serotonin, the variable is input by the user during run-time.
+  	//Unlike in the full simulation, in this test, the value for serotonin concentration is static. To aid testing of ctxneuron class behaviour with changng serotonin, the variable is input by the user during run-time.
 	cout << "Enter 5ht conc: ";
 	cin >> serot;
 
@@ -86,7 +86,7 @@ int main() {
 			on_contact_direction_green = 0;
 			on_contact_direction_blue = FitR(x);
 		//Stage 4. "Reversal Learning 2": 10 Rewards coincide with green stimuli.     
-		} else if ((11044<=i)&&(i<16064)){			// Stage 4
+		} else if ((11044<=i)&&(i<16064)){			
 			x = Reset(i);
 			InputG = PolynomialFitChosen(x);
 			InputB = PolynomialFitAlt(x);
@@ -108,6 +108,8 @@ int main() {
       
       		//Passing generated inputs into class every step.
 		OFC = TestCtxNeuron->doStep(NPInput, success, serot+0.1, on_contact_direction_green, on_contact_direction_blue);
+		
+		//Applying OFC limit.
 		if (OFC > 0.25) {
 			OFC = 0.25;
 		}
