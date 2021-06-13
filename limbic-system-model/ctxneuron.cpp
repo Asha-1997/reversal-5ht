@@ -53,7 +53,7 @@ float CtxNeuron::doStep(float nonPlasticInput, float success, float serot) {
 	float slowCa = slowCaDetector->filter(output);
 	slowCa = fabs(slowCa);
 	
-//UNEXPECTED REWARD MECHANISM // OFC boost when a stimuli found to be previously unrewarding is now rewarding (banarjee 2020)
+//UNEXPECTED REWARD MECHANISM // OFC boost when a stimuli found to be previously unrewarding is now rewarding
 	expected = 0;
 	if(success>0){ //using success variable (non-filtered) in place of nonPlasticInput to isolate event which mechanism is based around
 		if(((Past_contact[0] < Contacts[0]) && (Past[0] ==-1)) || ((Past_contact[1] < Contacts[1]) && (Past[1] ==-1))) {
