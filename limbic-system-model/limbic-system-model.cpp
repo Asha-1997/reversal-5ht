@@ -201,7 +201,7 @@ void Limbic_system::doStep(float _reward,
 
 void Limbic_system::logging() {
 	fprintf(flog,"%ld %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f "
-		"%f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %d\n",
+		"%f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %d\n",
 		step, //0
 		reward, //1
 		placefieldGreen, //2
@@ -236,7 +236,6 @@ void Limbic_system::logging() {
 		OFCNeuron->getWeight(1), // 31
 		mPFCneuronGreen->getWeight(0), // 32
 		mPFCneuronBlue->getWeight(0), // 33
-		expected //34
 		);
 	fflush(flog);
 }
