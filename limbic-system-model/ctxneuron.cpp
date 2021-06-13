@@ -96,6 +96,6 @@ float CtxNeuron::doStep(float nonPlasticInput, float success, float serot) {
 		}
 	}
 	
-	past_output = output; //changed name for readibility in derivative calculation
+	past_output = output; //changed name for readability in derivative calculation
 	return output;
 }
