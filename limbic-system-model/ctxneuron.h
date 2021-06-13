@@ -122,7 +122,7 @@ private:
 	
 
 public:
-	static float ofc5HTreceptors(float x, float htR1, float htR2) { //need to find out what static float means
+	static float ofc5HTreceptors(float x, float htR1, float htR2) {
 	  htR1 = 1 + htR1;
 	  htR2 = 2 + htR2;
 	  float r = (1-exp(-pow(x/htR1,htR1)))*htR2;
