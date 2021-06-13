@@ -87,7 +87,7 @@ float CtxNeuron::doStep(float nonPlasticInput, float success, float serot) {
 				weightChange(weights[i], learningRateLTP * serot * *(inputs[i]) * dOutput * Reinf_Gain_LTP[i]);
 			//LTD
 			weightChange(weights[i], - tLTD * learningRateLTD * slowCa * serot * Reinf_Gain_LTD[i]);			
-		}else{	//until maximum amount fo added inputs (10)
+		}else{	//until maximum amount of added inputs (10)
 			if (nonPlasticInput> 0.25)
 				//LTP
 				weightChange(weights[i], learningRateLTP * serot * *(inputs[i]) * dOutput);
