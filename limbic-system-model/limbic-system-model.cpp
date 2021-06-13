@@ -35,8 +35,6 @@ Limbic_system::Limbic_system()
 	DRNto5HTrelease = new SecondOrderLowpassFilter(0.001);
 	
 
-//REFERENCING LINES TO UPDATE LAST
-
 //Due to the functioning of the reinforcement mechanism, although up to 10 inputs can be added, primary inputs must be added first and contact streams in doStep must be passed in the same order. For the OFC, the first two added inputs will go through the reinforcement mechanism paired with the 2 passed in contact streams. Added inputs and contact streams are paired using their order: if the primary green plastic input is added first (e.g., visual_direction_Green_trace) and the primary blue input is second, then the green contact variable should be passed in before the blue contact variable in the OFC neuron doStep () function (as seen on line 96). This rule is less important for mPFC instances, as only one contact is passed in (blue or green) which is paired with the first added primary input (blue or green). However, it is still important to add whichever plastic input you would like reinforcement to affect (e.g., visual_direction_green_trace or visual_reward_Blue) first. Examples of this are in lines 147 and 150. As in lines 45, 46, 51 and 55, there is an option to add more plastic inputs to the ctxneuron objects- reinforcement will not be applied but normal weight change will.
 
 	OFCNeuron = new CtxNeuron(learning_rate_OFC,learning_rate_OFC * 0.1);
