@@ -55,7 +55,7 @@ public:
 		}else{
 			gain = min_gain; //If a stimuli is rewarding but wasn't in the last interaction (past == 0 (initial) or past == -1 (LTD),
 		}			 // Reinforcement LTP gain is maintained at the minimum value. 
-		return gain;		 //Regardless of the last past value, the past value is then updated to equal 1 (in .cpp).
+		return gain;		 //Regardless of the last past value, the past value is then updated to equal 1 (in ctxneuron.cpp).
 	}
 	
 	
@@ -67,9 +67,9 @@ public:
 				gain = max_LTD_Reinf;	//Setting max Reinforcement LTD gain
 			}
 		}else{
-			gain = min_gain;//Same as LTP, if a stimuli is not rewarding twice in a row, then Reinforcement LTP gain is maintained at 
-		}			 // the minimum value. 
-		return gain;		 //Regardless of the last past value, the past value is then updated to equal -1 (in .cpp).
+			gain = min_gain;//If a stimuli is not rewarding and either: it was rewarding in the last interaction, or this is the first interaction, 
+		}			 //then Reinforcement LTD gain is maintained at the minimum value. 
+		return gain;		 //Regardless of the last past value, the past value is then updated to equal -1 (in ctxneuron.cpp).
 	}
 
 
