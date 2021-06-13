@@ -1,3 +1,6 @@
+
+//Comments in this file have been limited to updated sections for clarity. 
+
 #ifndef _LIMBIC_SYSTEM
 #define _LIMBIC_SYSTEM
 
@@ -16,17 +19,10 @@ extern float DRN_OFFSET;
 
 class Limbic_system {
 public:
-	// constructor
 	Limbic_system();
 	
-	// destructor
 	~Limbic_system();
 	
-	// this feeds into the limbic system:
-	// we have a place field around the Green and
-	// Blue objects. There is a reflex input on contact
-	// and a distance signal from the "eyes" of the agent seeing the
-	// light or dark green object.
 	void doStep(float _reward,
 		    float _placefield_Green,
 		    float _placefield_Blue,
@@ -36,56 +32,57 @@ public:
 		    float _visual_direction_Blue,
 		    float _visual_reward_Green,
 		    float _visual_reward_Blue
-		);
+	);
 	
 	enum ExploreStates {EXPLORE_STRAIGHT, EXPLORE_LEFT, EXPLORE_RIGHT, EXPLORE_STOP, EXPLORE_NUM_ITEMS};
 
 	ExploreStates exploreState = EXPLORE_STRAIGHT;
 
-	// output to the motor system
-	// codes approach behaviour towards the light green object
-	// 0 is no and 1 is max speed
 	float getGreenOutput() {
 		return CoreGreenOut;
 	};
 	
-	// codes approach behaviour towards the dark green object
 	float getBlueOutput() {
 		return CoreBlueOut;
 	};
 	
-
 	float getExploreLeft() {return mPFC2CoreExploreLeft;};
 
 	float getExploreRight() {return mPFC2CoreExploreRight;};
+	
 
+	//Expected variable: for checking if an unexpected reward occurs (from a stimuli which was previously not rewarding) after switch.
+	int expected;
+	
+	//Non filtered reward variable is used to define successful or noon successful interactions with stimuli using the variable "success"
+	float non_filtered_reward = 0;
+	
+	//New variables to check workings of reinforcement mechanism
+	float OFC_LTP_gainG;
+	float OFC_LTD_gainG;
+	float OFC_LTP_gainB;
+	float OFC_LTD_gainB;
+	float mPFCg_LTP_gainG;
+	float mPFCg_LTD_gainG;
+	float mPFCb_LTP_gainB;
+	float mPFCb_LTD_gainB;	
+	
 private:
-	// simulation step counter
 	long int step;
 
-	// shunting inhibition is implemented as:
-	// neuronal_activity / ( 1 + inhibition * shunting_inhibition_factor )
 	float shunting_inhibition_factor = 200;
 
-	//////////////////////////////////////////////////////////////
-	// Nacc core
-	
-	// I see the light green object and I approach the light
-	// green one
 	float core_weight_lg2lg = 1;
 
-	// I see the dark green object and I approach the dark green one
 	float core_weight_dg2dg = 1;
 
 private:
-	// motor activities
 	float CoreGreenOut = 0;
 	float CoreBlueOut = 0;
 	float mPFC2CoreExploreLeft = 0;
 	float mPFC2CoreExploreRight = 0;
 
 public:
-	// learning rate of the core
 	const float learning_rate_core = 0;
 
 	float core_DA = 0;
@@ -93,39 +90,25 @@ public:
 
 	int coreExploreCtr = 0;
 
-	////////////////////////////////////////////////////////////////
-	// l-shell
-	// l-shall activity
 	float lShell = 0;
 
-	// dopamine activity
 	float shell_DA = 0;
 	float shell_plasticity = 0;
-
-	// weights for the shell system
+	
 	float lShell_weight_pflg = 0;
 	float lShell_weight_pfdg = 0;
 
-	// learning rate in the shell
 	const float learning_rate_lshell = 0.001;
 
-
-	////////////////////////////////////////////////////////////////
-	// VTA parameters
 	float VTA_baseline_activity = 0.10;
-	// actual baseline for LTD/LTP
 	float VTA_zero_val = 0.0505;
 
-	////////////////////////////////////////////////////////////////
-	// RMTg
 	float RMTg = 0;
 
-	///////////////////////////////////////////////////////////////
-	// mPFC
 	const float learning_rate_mPFC = 5;
 	
-	SecondOrderLowpassFilter* visual_direction_Green_mPFC_filter;
-	SecondOrderLowpassFilter* visual_direction_Blue_mPFC_filter;
+	SecondOrderLowpassFilter* visual_direction_Green_mPFC_filter; 
+	SecondOrderLowpassFilter* visual_direction_Blue_mPFC_filter; 
 
 	float visual_direction_Green_trace = 0;
 	float visual_direction_Blue_trace = 0;
@@ -139,42 +122,26 @@ public:
 	float mPFC_receptor_5HT1 = 0;
 	float mPFC_receptor_5HT2 = 0;
 
-	// counters which are triggered at random moment and generate a bias then
 	int mPFCspontGreen = 0;
 	int mPFCspontBlue = 0;
 
-        /////////////////////////////////////////////////////////////////
-	// VTA
 	float VTA = 0;
 
-	// https://www.nature.com/articles/nrn2849
-	SecondOrderLowpassFilter* VTA_forwardinhibition;
+	SecondOrderLowpassFilter* VTA_forwardinhibition; 
 
-	////////////////////////////////////////////////////////////////
-	// dorsolateral ventral pallidum
 	float dlVP = 0;
 
-	///////////////////////////////////////////////////////////////
-	// EP
 	float EP=0;
 
-	////////////////////////////////////////////////////////////////
-	// Lateral habenula
 	float LHb = 0;
 
-	///////////////////////////////////////////////////////////////
-	// DRN
 	float DRN = 0;
 
-	///////////////////////////////////////////////////////////////
-	// OFC
 	CtxNeuron* OFCNeuron;
 	float OFC = 0;
 
-	// learning rate for the OFC, just now from HC to OFC
 	const float learning_rate_OFC = 1;
 
-	// weights from the hippocampus place fields to the OFC
 	float pfLg2OFC = 0;
 	float pfDg2OFC = 0;
 
@@ -183,20 +150,14 @@ public:
 	float serotoninConcentration = 0;
 
 private:
-	// changes the weight w by the amount delta
-	// hard limits at -1 and +1
 	void weightChange(float &w, float delta);
 
-	// smoothes the signal when touching the object and
-	// creates a curiosity reaction
 	SecondOrderLowpassFilter* on_contact_direction_Green_filter = NULL;
 	SecondOrderLowpassFilter* on_contact_direction_Blue_filter = NULL;
 
-	// copies of the input signal
 	float reward = 0;
 	SecondOrderLowpassFilter* reward_filter = NULL;
 
-	// filtered version of the place fields
 	float placefieldGreen = 0;
 	float placefieldBlue = 0;
 
@@ -220,7 +181,5 @@ private:
 		if (r < 0.00001) return 0;
 		return r;
 	}
-	
 };
-
 #endif
