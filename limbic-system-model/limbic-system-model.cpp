@@ -297,7 +297,7 @@ void Limbic_system::logging() {
 		mPFCg_green_past, //45
 		mPFCg_blue_past, //46
 		mPFCb_green_past, //47
-		mPFCb_blue_past, //48
+		mPFCb_blue_past //48
 		);
 	fflush(flog);
 }
