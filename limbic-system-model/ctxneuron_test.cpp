@@ -117,7 +117,7 @@ int main() {
 		//Unexpected Reward Mechanism.
 		expected = TestCtxNeuron->getExpected();
 		if (expected == -1) {
-			OFC += 0.1;
+			OFC += 0.2;
 		}
 	
 		//Getting the weights of the synaptic connections of the plastic inputs for logging and plotting.
