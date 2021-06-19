@@ -100,7 +100,7 @@ void Limbic_system::doStep(float _reward,
 	//Unexpected Reward Mechanism: used for checking if an unexpected reward occurs (from a stimuli which was previously not rewarding) after a reversal switch. If so, a transient OFC boost of 0.1 is applied.
 	expected = OFCNeuron->getExpected();
 	if (expected == -1) {
-		OFC += 0.1;
+		OFC += 0.2;
 	}	
 	
 	DRN = (OFC * 5) / (1+RMTg * shunting_inhibition_factor + DRN_SUPPRESSION) + DRN_OFFSET;
