@@ -109,10 +109,10 @@ private:
 	float Past[maxInputs];
 	float max_reinf_inputs;
 	const float min_gain = 1;  //min increase in LTD or LTP speed is 0%
-	const float max_LTP_Reinf = 2;  //max increase in LTP speed is 100%
-	const float max_LTD_Reinf = 2;  //max increase in LTD speed is 100%
-	const float LTP_Reinf_gain_rate = 0.2;
-	const float LTD_Reinf_gain_rate = 0.2;
+	const float max_LTP_Reinf = 1;  //max increase in LTP speed is 100%
+	const float max_LTD_Reinf = 26;  //max increase in LTD speed is 100%
+	const float LTP_Reinf_gain_rate = 0;
+	const float LTD_Reinf_gain_rate = 5;
 	
 	void weightChange(float &w, float delta) {
 	  w += delta;
