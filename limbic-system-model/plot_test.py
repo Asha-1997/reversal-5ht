@@ -10,19 +10,22 @@ fig = pl.figure(1)
 a = 0
 b = len(data[:,0])
 # compound
-pl.subplot(311);
-pl.plot(data[a:b,0],data[a:b,1]);
-pl.plot(data[a:b,0],data[a:b,2]);
-pl.plot(data[a:b,0],data[a:b,3]);
-pl.ylabel('R-IG-IB');
+pl.subplot(411);
+pl.plot(data[a:b,0],data[a:b,1],"k");
+pl.ylabel('R');
 #
-pl.subplot(312);
-pl.plot(data[a:b,0],data[a:b,5]);
-pl.plot(data[a:b,0],data[a:b,6]);
+pl.subplot(412);
+pl.plot(data[a:b,0],data[a:b,2],"g-");
+pl.plot(data[a:b,0],data[a:b,3],"c-.");
+pl.ylabel('IG-IB');
+#
+pl.subplot(413);
+pl.plot(data[a:b,0],data[a:b,5],"g-");
+pl.plot(data[a:b,0],data[a:b,6],"c-.");
 pl.ylabel('w OFC G/B');
 #
-pl.subplot(313);
-pl.plot(data[a:b,0],data[a:b,4]);
+pl.subplot(414);
+pl.plot(data[a:b,0],data[a:b,4],"k");
 pl.ylabel('OFC');
 #
 #
